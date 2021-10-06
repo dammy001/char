@@ -1,5 +1,7 @@
 ## Installation
 
+Hi There,
+
 ```bash
 $ npm install
 ```
