@@ -22,26 +22,20 @@ jobs:
         node-version: [12.x, 14.x, 16.x]
         
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      
+      - name: Copy repository
+        uses: actions/checkout@v2
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
-
-    - name: Run lint
-    - run: yarn lint
-
-    - name: Run testing with coverage
-    - run: yarn test:cov
-
-    - name: Run end to end test
-    - run: yarn test:e2e
-
-    - name: Run Prebuild
-    - run: yarn prebuild
-
-    - name: Run Build
-    - run: yarn build --if-present
+      - name: Install npm dependencies
+        run: npm ci
+      
+      - name: Lint code
+        run: npm run lint
+      
+      - name: Run tests
+        run: npm run test
