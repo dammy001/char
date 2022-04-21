@@ -1,4 +1,4 @@
-FROM node:17-alpine AS prod
+FROM node:18-alpine AS prod
 WORKDIR /app
 COPY ./package.json ./
 COPY ./yarn.lock ./
